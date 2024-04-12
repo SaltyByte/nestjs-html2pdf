@@ -64,15 +64,18 @@ export class PdfService {
     const defaultOptions: PDFOptions = { format: "A4", ...pdfOptions };
     const browser = await launch(defaultLaunchOptions);
     try {
-      const page = await browser.newPage();
       const pdfPromises: Promise<Buffer>[] = [];
       for (const html of htmls) {
         pdfPromises.push(
           (async () => {
-            const inlinedPdf = await inlineCss(html, { url: "/" });
-            await page.setContent(inlinedPdf);
-            const pdfBuffer = await page.pdf(defaultOptions);
-            return pdfBuffer;
+            const page = await browser.newPage();
+            try {
+              const inlinedPdf = await inlineCss(html, { url: "/" });
+              await page.setContent(inlinedPdf);
+              return await page.pdf(defaultOptions);
+            } finally {
+              await page.close();
+            }
           })()
         );
       }
