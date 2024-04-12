@@ -14,7 +14,7 @@ This module for NestJS leverages Puppeteer to generate PDF documents from HTML. 
 Install the module using npm:
 
 ```bash
-npm install --save nestjs-pdf
+npm install --save nestjs-html2pdf
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ First, import the PdfModule into your NestJS module:
 
 ```bash
 import { Module } from '@nestjs/common';
-import { PdfModule } from 'nestjs-pdf';
+import { PdfModule } from 'nestjs-html2pdf';
 
 @Module({
 imports: [PdfModule],
@@ -36,7 +36,7 @@ export class AppModule {}
 
 ```bash
 import { Injectable } from '@nestjs/common';
-import { PdfService, PdfFileOptions, PdfMultipleFilesOptions } from 'nestjs-pdf';
+import { PdfService, PdfFileOptions, PdfMultipleFilesOptions } from 'nestjs-html2pdf';
 
 @Injectable()
 export class YourService {
